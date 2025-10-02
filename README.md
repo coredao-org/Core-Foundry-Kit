@@ -9,8 +9,8 @@ This project demonstrates how to compile, deploy, and interact with smart contra
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
+git clone https://github.com/coredao-org/Core-Foundry-Kit.git
+cd Core-Foundry-Kit
 ```
 
 ### 2. Install Foundry
@@ -80,14 +80,18 @@ forge test
 #### Using `forge create`:
 
 ```bash
-forge create --rpc-url $RPC_URL --private-key $PRIVATE_KEY src/YourContract.sol:YourContract --broadcast
+forge create --rpc-url $RPC_URL --private-key $PRIVATE_KEY src/YourContract.sol:YourContract --broadcast --legacy
 ```
 
 #### Using Deployment Scripts:
 
 ```bash
-forge script script/YourScript.s.sol:YourScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/YourScript.s.sol:YourScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --legacy
 ```
+
+If you're working with Rev+ contracts or encountering a `gas underpriced` issue, try using the `--gas-estimate-multiplier` flag in your Foundry deploy script.
+
+**Note** `--gas-estimate-multiplier` flag does not work with the `forge create` command, it only works with the `forge script` command.
 
 ---
 
@@ -128,18 +132,10 @@ The EVM version and Solidity compiler settings for this project are configured i
 
 - Solidity Version: 0.8.24
 
-#### For Core Testnet1:
-
-If you are using Core Testnet1, update the foundry.toml file as follows:
-
-- EVM Version: Paris
-
-- Solidity Version: 0.8.19
-
 ```bash
 [profile.default]
-evm_version = "paris"
-solc_version = "0.8.19"
+evm_version = "Shanghai"
+solc_version = "0.8.24"
 ```
 
 Ensure the settings match the network requirements to avoid compatibility issues.
